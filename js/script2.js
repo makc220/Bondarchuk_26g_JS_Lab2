@@ -1,14 +1,11 @@
 console.log("Завдання №2");
 console.log("З клавіатури вводиться текстовий рядок. Скласти скрипт, який підраховує кількість слів у кожному реченні.");
 
-
 function isNumeric(str) {
-    return !isNaN(str) && !isNaN(parseFloat(str));
+    return /^-?\d+(\.\d+)?$/.test(str.trim()); 
 }
 
-
 function countWordsInSentences(text) {
-   
     const sentences = text.match(/[^.!?]+[.!?]+|[^.!?]+$/g);
 
     if (!sentences) {
@@ -18,15 +15,12 @@ function countWordsInSentences(text) {
 
     console.log("Введений текст:", text);
 
-    
     sentences.forEach((sentence, index) => {
-       
         const words = sentence.trim().split(/\s+/).filter(word => word.length > 0);
         console.log(`Речення ${index + 1}: ${sentence.trim()}`);
         console.log(`Кількість слів: ${words.length}`);
     });
 }
-
 
 let inputText;
 while (true) {
@@ -37,7 +31,7 @@ while (true) {
         break;
     } else if (inputText.trim().length === 0) {
         console.log("Помилка: Введіть непорожній текстовий рядок.");
-    } else if (isNumeric(inputText.trim())) {
+    } else if (isNumeric(inputText.trim()) && !isNaN(parseFloat(inputText.trim()))) {
         console.log("Помилка: Введене значення є числом. Будь ласка, введіть текст.");
     } else {
         countWordsInSentences(inputText);
